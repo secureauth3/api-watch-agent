@@ -37,3 +37,14 @@ if your API goes down.
     - copy `ONE_PASSWORD_ACCESS_KEY` value from output into .env
 3. update values in `./src/contants.js`
 4. run prod or local command from output ```npm run start <key> <iv>``` or ```npm run prod <key> <iv>``` 
+
+# PM2 (prod deploy EC2)
+Note: Make sure node.js in installed
+1. `npm install pm2@latest -g`
+2. `pm2 link <link key>` (link to pm2 account dashboad)
+3. `NODE_ENV=production pm2 start --name api-watch --attach src/watch.js -- <key> <iv>`
+
+Info commands
+- `pm2 list`
+- `pm2 stop api-watch`
+- `pm2 delete api-watch`

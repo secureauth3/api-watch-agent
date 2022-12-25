@@ -1,0 +1,10 @@
+{
+    "phone": "+12152005532",
+    "interval": 10,
+    "urls": [
+        "https://google.com",
+        "https://facebook.com",
+        "https://twitter.com",
+        "https://auth.secureauth3.com/heartbeat"
+    ]
+}

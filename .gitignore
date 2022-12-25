@@ -1,0 +1,14 @@
+# dependencies
+.env
+node_modules/
+
+# testing
+/coverage
+
+# production
+dist/
+
+.vscode
+
+.DS_Store
+app.log

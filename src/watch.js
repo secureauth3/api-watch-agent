@@ -4,7 +4,6 @@ import dotenv from "dotenv"
 import fs from "fs"
 import https from "https"
 import { createDecipheriv} from 'crypto';
-import { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VALUT_NAME, ONE_PASSWORD_CONNECT_URL } from "./constants.js";
 dotenv.config();
 
 let twilioAccountSid = ''; 
@@ -71,7 +70,7 @@ const getSecretFromVault = async () => {
     );
 
     const op = OnePasswordConnect({
-        serverURL: ONE_PASSWORD_CONNECT_URL,
+        serverURL: process.env.ONE_PASSWORD_CONNECT_URL,
         token: onePasswordAccessToken,
         keepAlive: true,
     });
@@ -82,18 +81,18 @@ const getSecretFromVault = async () => {
         throw new Error('Vaults not found');
     }
     for(let i = 0; i < allVaults.length; i++) {
-        if (allVaults[i].name === VALUT_NAME) {
+        if (allVaults[i].name === process.env.VALUT_NAME) {
             myVaultId = allVaults[i].id;
         }
     }
 
     if (!myVaultId) {
-        throw new Error(`Did not find Vault name ${VALUT_NAME}.`);
+        throw new Error(`Did not find Vault name ${process.env.VALUT_NAME}.`);
     }
 
     // get items
-    const item1 = await op.getItemByTitle(myVaultId, TWILIO_ACCOUNT_SID);
-    const item2 = await op.getItemByTitle(myVaultId, TWILIO_AUTH_TOKEN);
+    const item1 = await op.getItemByTitle(myVaultId, process.env.TWILIO_ACCOUNT_SID);
+    const item2 = await op.getItemByTitle(myVaultId, process.env.TWILIO_AUTH_TOKEN);
 
     for(let i = 0; i < item1.fields.length; i++) {
         if (item1.fields[i].id === "credential") {
@@ -134,6 +133,6 @@ const configFileValidation = () => {
     checkAll();
     setInterval(checkAll, config.interval * 1000);
    } catch (error) {
-       console.log(error);  
+       console.log(error.message);  
    }
 })();

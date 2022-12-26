@@ -35,7 +35,7 @@ if your API goes down.
 1. ```npm install```
 2. ```npm run encrypt-token <1password-access-token>```
     - copy `ONE_PASSWORD_ACCESS_KEY` value from output into .env
-3. update values in `./src/contants.js`
+3. update values in `VALUT_NAME` `TWILIO_ACCOUNT_SID` `TWILIO_AUTH_TOKEN` `ONE_PASSWORD_CONNECT_URL` .env
 4. run prod or local command from output ```npm run start <key> <iv>``` or ```npm run prod <key> <iv>``` 
 
 # PM2 (prod deploy EC2)
@@ -47,7 +47,7 @@ Note: Make sure node.js is installed
 5. `pm2 link <link key>` (link to pm2 account dashboad -optional)
 6. `npm install` (install apps dependencies on your server. Must be inside of `/dist`)
 7. create `.env` on server and run `srcipts/encrypt.js` to get 1Password access to <key> and <iv> 
-8. `NODE_ENV=production pm2 start --name api-watch --attach src/watch.js -- <key> <iv>` (use pm2 to start app)
+8. `NODE_ENV=production pm2 start --name api-watch --attach watch-bundle.js -- <key> <iv>` (use pm2 to start app)
 
 Info commands
 - `pm2 list`

@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/watch.js",
-    "build": "rm -rf dist && rollup --config rollup.config.js && cp package.json dist && touch dist/config.json && touch dist/.env",
+    "build": "rm -rf dist && rollup --config rollup.config.js && cp package.json dist && touch dist/config.json",
     "encrypt-token": "node scripts/encrypt.js",
     "decrypt-token": "node scripts/decrypt.js"
   },

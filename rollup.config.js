@@ -1,5 +1,4 @@
 import terser from '@rollup/plugin-terser';
-import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 
 export default [
@@ -10,7 +9,7 @@ export default [
       format: 'esm',
       plugins: [terser()],
     },
-    plugins: [json(), resolve()],
+    plugins: [resolve()],
     external: ['dotenv', 'twilio', '@1password/connect'] // <-- suppresses the warning for external dependencies
   },
   {

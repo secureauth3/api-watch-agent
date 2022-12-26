@@ -5,7 +5,6 @@ import fs from "fs"
 import https from "https"
 import { createDecipheriv} from 'crypto';
 import { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VALUT_NAME, ONE_PASSWORD_CONNECT_URL } from "./constants.js";
-import { version } from '../package.json';
 dotenv.config();
 
 let twilioAccountSid = ''; 
@@ -48,7 +47,7 @@ const check = (url) => {
 }
 
 const checkAll = () => {
-    console.log('Checking all urls...');
+    console.log('Checking all urls...', new Date().toISOString());
     config.urls.forEach(check);
 }
 
@@ -127,12 +126,12 @@ const configFileValidation = () => {
 
 (async() =>{
    try {
-    console.log(`API Watch version: ${version}`);
     inputValidation();
     configFileValidation();
     await getSecretFromVault();
 
     // start app - executed endpoint check using interval (milliseconds)
+    checkAll();
     setInterval(checkAll, config.interval * 1000);
    } catch (error) {
        console.log(error);  

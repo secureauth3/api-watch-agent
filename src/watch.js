@@ -5,6 +5,7 @@ import fs from "fs"
 import https from "https"
 import { createDecipheriv} from 'crypto';
 import { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VALUT_NAME } from "./constants.js";
+import { version } from '../package.json';
 dotenv.config();
 
 let twilioAccountSid = ''; 
@@ -126,6 +127,7 @@ const configFileValidation = () => {
 
 (async() =>{
    try {
+    console.log('version ' + version);
     inputValidation();
     configFileValidation();
     await getSecretFromVault();

@@ -1,6 +1,4 @@
-import dotenv from "dotenv"
 import { createCipheriv, randomBytes, createDecipheriv } from 'crypto';
-dotenv.config();
 
 const initVector = randomBytes(16);
 const securitykey = randomBytes(32);
@@ -36,11 +34,6 @@ function decrypt(text, key) {
     if (!testEncrypted === dataToEncrypt) {
       throw new Error('Encryption failed');
     }
-    // execute command for prod: npm run encrypt-token <key> <iv>
-    console.log(`prod: npm run prod ${securitykey.toString('hex')} ${encryptedData.iv}`);
-    console.log('____________________________________________________')
-    console.log('____________________________________________________')
-    console.log(`local: npm run start ${securitykey.toString('hex')} ${encryptedData.iv}`);
   } catch (error) {
       console.log(error);  
   }

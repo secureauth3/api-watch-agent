@@ -7,7 +7,7 @@ export default [
     input: 'src/watch.js',
     output: {
       file: 'dist/watch-bundle.js',
-      format: 'es',
+      format: 'esm',
       plugins: [terser()],
     },
     plugins: [json(), resolve()],
@@ -17,7 +17,7 @@ export default [
     input: 'scripts/encrypt.js',
     output: {
       file: 'dist/scripts/encrypt.bundle.js',
-      format: 'es',
+      format: 'esm',
       plugins: [terser()]
     },
     plugins: [resolve()],
@@ -26,7 +26,7 @@ export default [
     input: 'scripts/decrypt.js',
     output: {
       file: 'dist/scripts/decrypt.bundle.js',
-      format: 'es',
+      format: 'esm',
       plugins: [terser()]
     },
     plugins: [resolve()],

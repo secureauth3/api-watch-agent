@@ -4,7 +4,7 @@
   "description": "Check your API health endpoints periodically and receive text message notification,if your API goes down.",
   "main": "watch.js",
   "author": "Idris Bowman",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,8 +19,8 @@
     "twilio": "2.5.2"
   },
   "devDependencies": {
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.2.1"
+    "@rollup/plugin-json": "6.0.0",
+    "@rollup/plugin-node-resolve": "15.0.1",
+    "@rollup/plugin-terser": "0.2.1"
   }
 }

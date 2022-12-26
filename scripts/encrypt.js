@@ -31,7 +31,7 @@ function decrypt(text, key) {
     console.log('____________________________________________________')
     
     const testEncrypted = decrypt(encryptedData, securitykey.toString('hex'));
-    if (!testEncrypted === dataToEncrypt) {
+    if (testEncrypted !== dataToEncrypt) {
       throw new Error('Encryption failed');
     }
   } catch (error) {

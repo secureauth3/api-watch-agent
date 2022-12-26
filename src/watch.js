@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 import fs from "fs"
 import https from "https"
 import { createDecipheriv} from 'crypto';
-import { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VALUT_NAME } from "./constants.js";
+import { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, VALUT_NAME, ONE_PASSWORD_CONNECT_URL } from "./constants.js";
 import { version } from '../package.json';
 dotenv.config();
 
@@ -72,7 +72,7 @@ const getSecretFromVault = async () => {
     );
 
     const op = OnePasswordConnect({
-        serverURL: "https://auth.secureauth3.com",
+        serverURL: ONE_PASSWORD_CONNECT_URL,
         token: onePasswordAccessToken,
         keepAlive: true,
     });
@@ -127,7 +127,7 @@ const configFileValidation = () => {
 
 (async() =>{
    try {
-    console.log('version ' + version);
+    console.log(`API Watch version: ${version}`);
     inputValidation();
     configFileValidation();
     await getSecretFromVault();

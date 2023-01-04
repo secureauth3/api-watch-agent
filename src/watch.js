@@ -61,16 +61,19 @@ const doDecrypt = (text) => {
 }
 
 const getSecretFromVault = async () => {
+    console.log(process.argv[2])
+    console.log(process.argv[3])
+    console.log(process.argv[4])
     const onePasswordAccessToken = doDecrypt(
         {
             key: process.argv[2],
             iv: process.argv[3],
-            encryptedData: process.env.ONE_PASSWORD_ACCESS_KEY
+            encryptedData: process.argv[4]
         }
     );
 
     const op = OnePasswordConnect({
-        serverURL: process.env.ONE_PASSWORD_CONNECT_URL,
+        serverURL: config.onePasswordVault.onePasswordConnectUrl,
         token: onePasswordAccessToken,
         keepAlive: true,
     });
@@ -81,18 +84,18 @@ const getSecretFromVault = async () => {
         throw new Error('Vaults not found');
     }
     for(let i = 0; i < allVaults.length; i++) {
-        if (allVaults[i].name === process.env.VALUT_NAME) {
+        if (allVaults[i].name === config.onePasswordVault.vaultName) {
             myVaultId = allVaults[i].id;
         }
     }
 
     if (!myVaultId) {
-        throw new Error(`Did not find Vault name ${process.env.VALUT_NAME}.`);
+        throw new Error(`Did not find Vault name ${config.onePasswordVault.vaultName}.`);
     }
 
     // get items
-    const item1 = await op.getItemByTitle(myVaultId, process.env.TWILIO_ACCOUNT_SID);
-    const item2 = await op.getItemByTitle(myVaultId, process.env.TWILIO_AUTH_TOKEN);
+    const item1 = await op.getItemByTitle(myVaultId, config.onePasswordVault.twilioAccountSIDVaultItem);
+    const item2 = await op.getItemByTitle(myVaultId, config.onePasswordVault.twilioAuthTokenVaultItem);
 
     for(let i = 0; i < item1.fields.length; i++) {
         if (item1.fields[i].id === "credential") {
@@ -108,8 +111,8 @@ const getSecretFromVault = async () => {
 }
 
 const inputValidation = () => {
-    if(!process.argv[2] || !process.argv[3]) {
-        throw new Error('Please provide key and iv');
+    if(!process.argv[2] || !process.argv[3] || !process.argv[4]) {
+        throw new Error('Please provide key,  iv, and encrypted one password access key');
     }
 }
 
@@ -118,8 +121,24 @@ const configFileValidation = () => {
         throw new Error('config.json file not found');
     }
 
-    if (!config.urls || !config.interval || !config.phone) {
+    if (!config.urls || !config.interval || !config.phone || !config.onePasswordVault) {
         throw new Error('config.json is missing required fields');
+    }
+
+    if (!config.onePasswordVault.vaultName 
+        || !config.onePasswordVault.twilioAccountSIDVaultItem 
+        || !config.onePasswordVault.twilioAuthTokenVaultItem
+        || !config.onePasswordVault.onePasswordConnectUrl
+        ) {
+        throw new Error('config.json is missing required fields');
+    }
+
+    if (config.urls.length === 0) {
+        throw new Error('config.json is missing urls');
+    }
+
+    if (config.interval < 1) {
+        throw new Error('config.json interval must be greater than 1');
     }
 }
 
@@ -133,6 +152,7 @@ const configFileValidation = () => {
     checkAll();
     setInterval(checkAll, config.interval * 1000);
    } catch (error) {
-       console.log(error.message);  
+      console.log(error.message);  
+      process.exit(1);
    }
 })();

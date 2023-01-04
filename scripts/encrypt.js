@@ -25,15 +25,13 @@ function decrypt(text, key) {
   try {
     const dataToEncrypt = process.argv[2];
     const encryptedData = encrypt(dataToEncrypt);
-    console.log('key: ' + securitykey.toString('hex'));
-    console.log('iv: ' + initVector.toString('hex'));
-    console.log(`ONE_PASSWORD_ACCESS_KEY=${encryptedData.encryptedData}`);
-    console.log('____________________________________________________')
+    const output = `${securitykey.toString('hex')},${initVector.toString('hex')},${encryptedData.encryptedData}`
     
     const testEncrypted = decrypt(encryptedData, securitykey.toString('hex'));
     if (testEncrypted !== dataToEncrypt) {
       throw new Error('Encryption failed');
     }
+    console.log(output);
   } catch (error) {
       console.log(error);  
   }

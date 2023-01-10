@@ -149,6 +149,7 @@ const configFileValidation = () => {
     await getSecretFromVault();
 
     // start app - executed endpoint check using interval (milliseconds)
+    sendMessage('App started');
     checkAll();
     setInterval(checkAll, config.interval * 1000);
    } catch (error) {

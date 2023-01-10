@@ -22,7 +22,7 @@ if your API goes down. This agent was designed to run on AWS ECS instance
 3. Set up config.json
 ```json
     {
-        "phone": "+<my-phone-number>",
+        "phone": "+<your country code><your-phone-number>",
         "messagingServiceSid": "<your-messagingServiceSid>",
         "interval": 1200,
         "urls": [
@@ -50,11 +50,11 @@ Note: Make sure node.js is installed on EC2 instance
 2. ssh ec2-user@<your-server-ip-address> -i ~<local-path-to-your-ssh-key.pem> (ssh into your server)
 3. scp -i ~<local-path-to-your-ssh-key.pem> -r ./dist/ ec2-user@<your-server-ip-address>:~ (copy bundled app onto your server)
 4. `npm install pm2@latest -g`
-5. from root path `cd ./dist`
+5. from root path `cd ~/dist`
 6. `pm2 link <link key>` (link to pm2 account dashboad -optional)
 7. `npm install` (install apps dependencies on your server. Must be inside of `./dist` to start app in prod)
-8. `chmod 0700 dist/scripts/startup.sh`
-9. `scripts/startup.sh <your-1Password-acces-token>` (use pm2 to start app)
+8. `chmod 0700 scripts/startup.sh`
+9.  `scripts/startup.sh <your-1Password-acces-token>` (use pm2 to start app)
 
 Info commands
 - `pm2 list`

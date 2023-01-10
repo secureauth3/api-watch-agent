@@ -25,7 +25,7 @@ const sendMessage = (messageBody) => {
     twilioClient.messages 
       .create({ 
          body: messageBody,  
-         messagingServiceSid: 'MG423b3f2093e44e62a21552f88c87fee0',      
+         messagingServiceSid: config.messagingServiceSid,     
          to: config.phone
        }) 
       .then(message => console.log('Message sent:', message.sid)) 

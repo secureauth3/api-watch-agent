@@ -23,6 +23,7 @@ if your API goes down. This agent was designed to run on AWS ECS instance
 ```json
     {
         "phone": "+<my-phone-number>",
+        "messagingServiceSid": "<your-messagingServiceSid>",
         "interval": 1200,
         "urls": [
             "list of endpoint you want watch>",

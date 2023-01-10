@@ -47,8 +47,8 @@ if your API goes down. This agent was designed to run on AWS ECS instance
 # PM2 (prod deploy EC2 instance)
 Note: Make sure node.js is installed on EC2 instance
 1. `npm run build`
-2. ssh ec2-user@<your-server-ip-address> -i ~<local-path-to-your-ssh-key.pem> (ssh into your server)
-3. scp -i ~<local-path-to-your-ssh-key.pem> -r ./dist/ ec2-user@<your-server-ip-address>:~ (copy bundled app onto your server)
+2. `ssh ec2-user@<your-server-ip-address> -i ~<local-path-to-your-ssh-key.pem>` (ssh into your server)
+3. `scp -i ~<local-path-to-your-ssh-key.pem> -r ./dist/ ec2-user@<your-server-ip-address>:~` (copy bundled app onto your server)
 4. `npm install pm2@latest -g`
 5. from root path `cd ~/dist`
 6. `pm2 link <link key>` (link to pm2 account dashboad -optional)
